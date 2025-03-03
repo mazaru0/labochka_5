@@ -21,6 +21,7 @@ public class TicketManager {
         this.filePath = filePath;
         this.tickets = new PriorityQueue<>(Comparator.comparingLong(Ticket::getId));
         loadFromFile(filePath);
+        System.out.println("Hello World");
     }
 
     public void loadFromFile(String filePath) {
