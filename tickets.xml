@@ -1,0 +1,18 @@
+<Tickets>
+    <Ticket>
+        <id>1</id>
+        <name>Обновленный билет</name>
+        <price>150</price>
+        <coordinates>
+            <x>10</x>
+            <y>50</y>
+        </coordinates>
+        <creationDate>Mon Mar 03 04:49:09 MSK 2025</creationDate>
+        <type>USUAL</type>
+        <venue>
+            <id>55</id>
+            <name>Большой Кинозал</name>
+            <capacity>1500</capacity>
+        </venue>
+    </Ticket>
+</Tickets>
