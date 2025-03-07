@@ -164,6 +164,8 @@ public class TicketManager {
         map.put(help.getName(), help);
         History history = new History();
         map.put(history.getName(), history);
+        AddIfMinCommand addIfMinCommand = new AddIfMinCommand();
+        map.put(addIfMinCommand.getName(), addIfMinCommand);
 
         Environment environment = new Environment(map, manager.tickets, manager.filePath, commandHistory);
 

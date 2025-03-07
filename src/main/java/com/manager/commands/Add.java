@@ -17,7 +17,7 @@ public class Add extends Command {
     private final Scanner scanner;
 
     public Add() {
-        super("add");
+        super("add ");
         this.scanner = new Scanner(System.in);
     }
 

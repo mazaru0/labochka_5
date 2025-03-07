@@ -1,5 +1,6 @@
 package com.manager.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Ticket {
@@ -46,6 +47,10 @@ public class Ticket {
         }
     }
 
+    public Coordinates getCoordinates() {
+        return coordinates;
+    }
+
     public long getId() {
         return id;
     }
@@ -75,6 +80,9 @@ public class Ticket {
                 "            <capacity>" + (venue != null ? venue.getCapacity() : "") + "</capacity>\n" +
                 "        </venue>\n" +
                 "    </Ticket>";
+    }
+    public void list(){
+
     }
 
     public static void setIdCounter(long idCounter) {

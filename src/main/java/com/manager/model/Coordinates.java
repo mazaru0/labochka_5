@@ -1,5 +1,7 @@
 package com.manager.model;
 
+import java.util.ArrayList;
+
 public class Coordinates {
     private int x; // Используем int для целочисленных координат
     private int y;
@@ -12,6 +14,7 @@ public class Coordinates {
         }
         this.y = y;
     }
+
 
     public int getX() {
         return x;
