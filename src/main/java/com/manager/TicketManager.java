@@ -14,7 +14,7 @@ import javax.xml.parsers.*;
 import org.w3c.dom.*;
 
 public class TicketManager {
-    private PriorityQueue<Ticket> tickets;
+    public PriorityQueue<Ticket> tickets;
     private final String filePath;
 
     public TicketManager(String filePath) {
@@ -133,12 +133,13 @@ public class TicketManager {
         final List<String> commandHistory = new LinkedList<>();
 
         String filePath = System.getenv("TICKET_FILE");
+
         if (filePath == null) {
             filePath = "tickets.xml";
         }
         TicketManager manager = new TicketManager(filePath);
         Scanner scanner = new Scanner(System.in);
-
+        System.out.println(manager);
         HashMap<String, Command> map = new HashMap<>();
         Add add = new Add();
         map.put(add.getName(), add);

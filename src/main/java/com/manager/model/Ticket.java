@@ -1,6 +1,5 @@
 package com.manager.model;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 public class Ticket {
@@ -116,4 +115,9 @@ public class Ticket {
     public void setVenue(Venue venue) {
         this.venue = venue;
     }
+    public long getCoorX(){
+        long x=coordinates.getX();
+        return x;
+
+    };
 }
