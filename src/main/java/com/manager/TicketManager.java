@@ -143,7 +143,7 @@ public class TicketManager {
         HashMap<String, Command> map = new HashMap<>();
         AddCommand addCommand = new AddCommand();
         map.put(addCommand.getName(), addCommand);
-        UpdateCommand update = new UpdateCommand();
+        UpdateIdCommand update = new UpdateIdCommand();
         map.put(update.getName(), update);
         ClearCommand clearCommand = new ClearCommand();
         map.put(clearCommand.getName(), clearCommand);
@@ -167,6 +167,12 @@ public class TicketManager {
         map.put(historyCommand.getName(), historyCommand);
         AddIfMinCommand addIfMinCommand = new AddIfMinCommand();
         map.put(addIfMinCommand.getName(), addIfMinCommand);
+        GroupCountingByCoordinatesCommand groupCountingByCoordinatesCommand = new GroupCountingByCoordinatesCommand();
+        map.put(groupCountingByCoordinatesCommand.getName(),groupCountingByCoordinatesCommand);
+        PrintUniquePriceCommand printUniquePriceCommand = new PrintUniquePriceCommand();
+        map.put(printUniquePriceCommand.getName(),printUniquePriceCommand);
+
+
 
         Environment environment = new Environment(map, manager.tickets, manager.filePath, commandHistory);
 

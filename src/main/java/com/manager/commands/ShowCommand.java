@@ -11,10 +11,22 @@ public class ShowCommand extends Command {
         super("show");
     }
 
+    /**
+     * Выводит в стандартный поток вывода все элементы коллекции в строковом представлении
+     * @param env
+     * @param stdout
+     * @param stdin
+     * @param commandArgs
+     */
+
     @Override
     public void execute(Environment env, PrintStream stdout, InputStream stdin, String[] commandArgs) {
         env.getTickets().forEach(System.out::println);
     }
+    /**
+     * Справка для команды help
+     * @return
+     */
 
     @Override
     public String getHelp() {

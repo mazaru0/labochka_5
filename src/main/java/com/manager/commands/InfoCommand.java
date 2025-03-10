@@ -12,12 +12,24 @@ public class InfoCommand extends Command {
         super("info");
     }
 
+    /**
+     * Выводит в стандартный поток вывода информацию о коллекции (тип, дата инициализации, количество элементов и т.д.)
+     * @param env
+     * @param stdout
+     * @param stdin
+     * @param commandArgs
+     */
+
     @Override
     public void execute(Environment env, PrintStream stdout, InputStream stdin, String[] commandArgs) {
         stdout.println("Тип коллекции: " + env.getTickets().getClass().getSimpleName());
         stdout.println("Дата инициализации: " + new Date());
         stdout.println("Количество элементов: " + env.getTickets().size());
     }
+    /**
+     * Справка для команды help
+     * @return
+     */
 
     @Override
     public String getHelp() {

@@ -22,18 +22,22 @@ public class AddIfMinCommand extends Command {
         super("add_if_min");
         this.scanner = new Scanner(System.in);
     }
+
     @Override
     public void execute(Environment env, PrintStream stdout, InputStream stdin, String[] commandArgs) throws CommandException {{
         PriorityQueue<Ticket> updatedQueue = new PriorityQueue<>(Comparator.comparingLong(Ticket::getId));
         boolean found = false;
             Ticket ticket = env.getTickets().poll();
-        assert ticket != null;
-        long x= ticket.getCoordinates().getX();
+            long x= ticket.getCoordinates().getX();
             long price = ticket.getPrice();
             long y= ticket.getCoordinates().getY();
 
             System.out.println(Math.min(Math.min(Math.min(ticket.getId(),y),x),price));
         }}
+    /**
+     * Справка для команды help
+     * @return
+     */
     @Override
     public String getHelp() {
         return "";

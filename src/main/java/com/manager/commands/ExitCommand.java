@@ -11,11 +11,22 @@ public class ExitCommand extends Command {
         super("exit");
     }
 
+    /**
+     * Завершает программу (без сохранения в файл)
+     * @param env
+     * @param stdout
+     * @param stdin
+     * @param commandArgs
+     */
+
     @Override
     public void execute(Environment env, PrintStream stdout, InputStream stdin, String[] commandArgs) {
         System.exit(0);
     }
-
+    /**
+     * Справка для команды help
+     * @return
+     */
     @Override
     public String getHelp() {
         return "Эта команда завершает программу.";

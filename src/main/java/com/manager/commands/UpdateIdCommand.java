@@ -15,13 +15,21 @@ import java.util.Date;
 import java.util.PriorityQueue;
 import java.util.Scanner;
 
-public class UpdateCommand extends Command {
+public class UpdateIdCommand extends Command {
     private final Scanner scanner;
 
-    public UpdateCommand() {
-        super("update");
+    public UpdateIdCommand() {
+        super("update id");
         this.scanner = new Scanner(System.in);
     }
+
+    /**
+     * Обновляет значение элемента коллекции, id которого равен заданному
+     * @param env
+     * @param stdout
+     * @param stdin
+     * @param commandArgs
+     */
 
 
     @Override
@@ -126,6 +134,10 @@ public class UpdateCommand extends Command {
         }
 
     }
+    /**
+     * Справка для команды help
+     * @return
+     */
 
     @Override
     public String getHelp() {

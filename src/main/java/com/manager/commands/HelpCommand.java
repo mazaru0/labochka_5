@@ -12,6 +12,14 @@ public class HelpCommand extends Command {
         super("help");
     }
 
+    /**
+     * Выводит справку по доступным командам
+     * @param env
+     * @param stdout
+     * @param stdin
+     * @param commandArgs
+     */
+
     @Override
     public void execute(Environment env, PrintStream stdout, InputStream stdin, String[] commandArgs) {
         HashMap<String, Command> stringCommandHashMap = env.getStringCommandHashMap();
@@ -24,6 +32,10 @@ public class HelpCommand extends Command {
             });
         }
     }
+    /**
+     * Справка для команды help
+     * @return
+     */
 
     @Override
     public String getHelp() {

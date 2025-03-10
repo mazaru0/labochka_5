@@ -12,6 +12,14 @@ public class RemoveAnyByPriceCommand extends Command {
         super("remove_any_by_price");
     }
 
+    /**
+     * Удаляет из коллекции один элемент, значение поля price которого эквивалентно заданному
+     * @param env
+     * @param stdout
+     * @param stdin
+     * @param commandArgs
+     */
+
     @Override
     public void execute(Environment env, PrintStream stdout, InputStream stdin, String[] commandArgs) {
         try {
@@ -27,6 +35,10 @@ public class RemoveAnyByPriceCommand extends Command {
             System.err.println("Ошибка: Цена должена быть числом.");
         }
     }
+    /**
+     * Справка для команды help
+     * @return
+     */
 
     @Override
     public String getHelp() {

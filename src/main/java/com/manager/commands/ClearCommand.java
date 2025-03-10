@@ -11,12 +11,23 @@ public class ClearCommand extends Command {
         super("clear");
     }
 
+    /**
+     * Очищает коллекцию
+     * @param env
+     * @param stdout
+     * @param stdin
+     * @param commandArgs
+     */
+
     @Override
     public void execute(Environment env, PrintStream stdout, InputStream stdin, String[] commandArgs) {
         env.getTickets().clear();
         stdout.println("Коллекция билетов очищена.");
     }
-
+    /**
+     * Справка для команды help
+     * @return
+     */
     @Override
     public String getHelp() {
         return "Эта команда очищает коллекцию.";

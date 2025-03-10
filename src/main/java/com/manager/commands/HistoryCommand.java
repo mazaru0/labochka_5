@@ -11,6 +11,14 @@ public class HistoryCommand extends Command {
         super("history");
     }
 
+    /**
+     * Выводит последние 7 команд (без их аргументов)
+     * @param env
+     * @param stdout
+     * @param stdin
+     * @param commandArgs
+     */
+
     @Override
     public void execute(Environment env, PrintStream stdout, InputStream stdin, String[] commandArgs) {
         System.out.println("Последние команды:");
@@ -28,6 +36,10 @@ public class HistoryCommand extends Command {
             }
         }
     }
+    /**
+     * Справка для команды help
+     * @return
+     */
 
     @Override
     public String getHelp() {

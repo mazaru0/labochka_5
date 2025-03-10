@@ -14,8 +14,8 @@ import java.util.stream.Collectors;
 
 public class GroupCountingByCoordinatesCommand extends Command {
 
-    protected GroupCountingByCoordinatesCommand(String name) {
-        super(name);
+    public GroupCountingByCoordinatesCommand() {
+        super("group_counting_by_coordinates");
     }
 
     /**

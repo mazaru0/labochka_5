@@ -14,6 +14,14 @@ public class RemoveByIdCommand extends Command {
         super("remove_by_id");
     }
 
+    /**
+     * Удаляет элемент из коллекции по его id
+     * @param env
+     * @param stdout
+     * @param stdin
+     * @param commandArgs
+     */
+
     @Override
     public void execute(Environment env, PrintStream stdout, InputStream stdin, String[] commandArgs) {
         try {
@@ -40,6 +48,10 @@ public class RemoveByIdCommand extends Command {
             System.err.println("Ошибка: ID должен быть числом.");
         }
     }
+    /**
+     * Справка для команды help
+     * @return
+     */
 
     @Override
     public String getHelp() {

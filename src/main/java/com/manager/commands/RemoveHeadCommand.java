@@ -12,6 +12,14 @@ public class RemoveHeadCommand extends Command {
         super("remove_head");
     }
 
+    /**
+     * Выводит первый элемент коллекции и удаляет его
+     * @param env
+     * @param stdout
+     * @param stdin
+     * @param commandArgs
+     */
+
     @Override
     public void execute(Environment env, PrintStream stdout, InputStream stdin, String[] commandArgs) {
         if (env.getTickets().isEmpty()) {
@@ -22,6 +30,10 @@ public class RemoveHeadCommand extends Command {
         Ticket head = env.getTickets().poll();
         stdout.println("Удален первый элемент: " + head);
     }
+    /**
+     * Справка для команды help
+     * @return
+     */
 
     @Override
     public String getHelp() {

@@ -17,9 +17,17 @@ public class AddCommand extends Command {
     private final Scanner scanner;
 
     public AddCommand() {
-        super("add ");
+        super("add");
         this.scanner = new Scanner(System.in);
     }
+
+    /**
+     * Добавляет новый элемент в коллекцию
+     * @param env
+     * @param stdout
+     * @param stdin
+     * @param commandArgs
+     */
 
 
     @Override
@@ -92,6 +100,11 @@ public class AddCommand extends Command {
             System.err.println("Ошибка при добавлении билета: " + e.getMessage());
         }
     }
+
+    /**
+     * Справка для команды help
+     * @return
+     */
 
     @Override
     public String getHelp() {
