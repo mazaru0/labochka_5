@@ -171,6 +171,9 @@ public class TicketManager {
         map.put(groupCountingByCoordinatesCommand.getName(),groupCountingByCoordinatesCommand);
         PrintUniquePriceCommand printUniquePriceCommand = new PrintUniquePriceCommand();
         map.put(printUniquePriceCommand.getName(),printUniquePriceCommand);
+        ExecuteScriptCommand executeScriptCommand = new ExecuteScriptCommand();
+        map.put(executeScriptCommand.getName(),executeScriptCommand);
+
 
 
 
