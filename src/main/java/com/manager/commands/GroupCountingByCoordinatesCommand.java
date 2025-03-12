@@ -29,9 +29,9 @@ public class GroupCountingByCoordinatesCommand extends Command {
     @Override
     public void execute(Environment env, PrintStream stdout, InputStream stdin, String[] commandArgs) throws CommandException {
         Map<Long, Long> groupedByX = env.getTickets().stream()
-                .collect(Collectors.groupingBy(Ticket::getCoorX, Collectors.counting()));
+                .collect(Collectors.groupingBy(Ticket::getCoorX, Collectors.counting())); //Сделала поток и нагруппировала по х
             stdout.println("Группировка по координате х: ");
-            groupedByX.forEach((x, count) -> stdout.println("Координата х = " + x + " - количество элементов в группе " + count));
+            groupedByX.forEach((x, count) -> stdout.println("Координата х = " + x + " - количество элементов в группе " + count)); //перебираю группы и смотрю кол-во элементов
         };
 
     /**

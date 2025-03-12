@@ -28,8 +28,6 @@ public class PrintUniquePriceCommand extends Command {
         List<Long> prices = env.getTickets().stream()
                 .map(Ticket::getPrice) // Получаем имена
                 .toList(); // Собираем в список
-
-       // prices.forEach(System.out::println); // Выводим каждое имя
         System.out.println("Все цены билетов: ");
         for (Long element : prices) {
             System.out.print(element + " ");

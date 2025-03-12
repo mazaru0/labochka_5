@@ -99,6 +99,7 @@ public class AddCommand extends Command {
         } catch (Exception e) {
             System.err.println("Ошибка при добавлении билета: " + e.getMessage());
         }
+
     }
 
     /**

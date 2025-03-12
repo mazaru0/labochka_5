@@ -4,14 +4,20 @@ import com.manager.TicketManager;
 import com.manager.commands.base.Command;
 import com.manager.commands.base.Environment;
 import com.manager.commands.exception.CommandException;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.*;
 import java.util.*;
 
 public class ExecuteScriptCommand extends Command {
+    private final Scanner scanner;
 
     public ExecuteScriptCommand() {
         super("execute_script");
+        this.scanner = new Scanner(System.in);
     }
 
     /**
@@ -25,15 +31,21 @@ public class ExecuteScriptCommand extends Command {
 
     @Override
     public void execute(Environment env, PrintStream stdout, InputStream stdin, String[] commandArgs) throws CommandException {
-                ArrayList<String> itemsList = new ArrayList<>();
 
-                try (BufferedReader file = new BufferedReader(new FileReader("commands.xml"))) {
+                ArrayList<String> itemsList = new ArrayList<>();
+        Scanner scanner = new Scanner(stdin);
+        String name = commandArgs[0];
+        System.out.println(name);
+        try (BufferedReader file = new BufferedReader(new FileReader(name))) {
+            if (file == null) {
+                throw new CommandException ("Ошибка: Переменная окружения не установлена!");
+            }
                     String line;
 
                     while ((line = file.readLine()) != null) {
-                        // Проверяем, содержит ли строка открывающий тег <item>
+                        // Если в строке есть <item>, то читаем ее
                         if (line.trim().startsWith("<item>") && line.trim().endsWith("</item>")) {
-                            // Извлекаем текст между тегами
+                            // Читаю текст от 7 элемента до элемента длина строки -7
                             String item = line.trim().substring(6, line.trim().length() - 7);
                             itemsList.add(item);
                         }
@@ -42,18 +54,18 @@ public class ExecuteScriptCommand extends Command {
                     e.printStackTrace();
                 }
 
-                // Преобразуем ArrayList в массив String
+                // Делаю ArrayList в массив String
                 String[] itemsArray = itemsList.toArray(new String[0]);
-
+                //Мапу загрузила
         HashMap<String, Command> stringCommandHashMap = env.getStringCommandHashMap();
         for ( String element : itemsArray){
-        if (stringCommandHashMap.containsKey(element)){
-            System.out.println("Вывод команды: " + element);
-            stringCommandHashMap.get(element).execute(env,stdout,stdin,commandArgs);
+        if (!stringCommandHashMap.containsKey(element)){
+            System.err.println(" Такой команды нет! Исправьте данные в файле");
 
         }
         else {
-            System.err.println(" Такой команды нет! Исправьте данные в файле");
+            System.out.println("Вывод команды: " + element);
+            stringCommandHashMap.get(element).execute(env,stdout,stdin,commandArgs);
         }
         }}
 

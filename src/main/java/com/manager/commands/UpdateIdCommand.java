@@ -19,7 +19,7 @@ public class UpdateIdCommand extends Command {
     private final Scanner scanner;
 
     public UpdateIdCommand() {
-        super("update id");
+        super("update_id");
         this.scanner = new Scanner(System.in);
     }
 
