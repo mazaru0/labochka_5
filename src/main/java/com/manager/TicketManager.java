@@ -136,7 +136,6 @@ public static void main(String[] args) {
     }
     TicketManager manager = new TicketManager(filePath);
     Scanner scanner = new Scanner(System.in);
-    System.out.println(manager);
     HashMap<String, Command> map = new HashMap<>();
     AddCommand addCommand = new AddCommand();
     map.put(addCommand.getName(), addCommand);

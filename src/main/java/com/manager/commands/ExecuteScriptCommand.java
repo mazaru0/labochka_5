@@ -31,10 +31,17 @@ public class ExecuteScriptCommand extends Command {
 
     @Override
     public void execute(Environment env, PrintStream stdout, InputStream stdin, String[] commandArgs) throws CommandException {
+     String name;
+        if (commandArgs[0].length()==0){
+          stdout.println("Введите имя файла");
+            name = scanner.nextLine();
+      }
+        else{
+            name = commandArgs[0];
 
-                ArrayList<String> itemsList = new ArrayList<>();
+        }
+       ArrayList<String> itemsList = new ArrayList<>();
         Scanner scanner = new Scanner(stdin);
-        String name = commandArgs[0];
         System.out.println(name);
         try (BufferedReader file = new BufferedReader(new FileReader(name))) {
             if (file == null) {

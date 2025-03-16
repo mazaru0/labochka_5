@@ -35,8 +35,12 @@ public class UpdateIdCommand extends Command {
                 stdout.println("Введите id");
                 id = scanner.nextLine();
             }
+            else {
+                id = commandArgs[0];
+            }
             while (!env.getTickets().isEmpty()) {
                 Ticket ticket = env.getTickets().poll();
+
                 if (ticket.getId() == Integer.parseInt(commandArgs.length == 0 ? id : commandArgs[0])) {
                     try {
                         System.out.println("Введите данные для этого билета сначала:");
@@ -153,9 +157,9 @@ public class UpdateIdCommand extends Command {
             env.setTickets(updatedQueue);
 
             if (found) {
-                stdout.println("Билет с ID " + Integer.parseInt(commandArgs[0]) + " обновлён.");
+                stdout.println("Билет с ID " + id + " обновлён.");
             } else {
-                stdout.println("Билет с ID " + Integer.parseInt(commandArgs[0]) + " не найден.");
+                stdout.println("Билет с ID " + id + " не найден.");
             }
         } catch (NumberFormatException e) {
             System.err.println("Ошибка: ID должен быть числом.");

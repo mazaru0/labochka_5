@@ -33,18 +33,23 @@ public class AddIfMinCommand extends Command {
      * @param commandArgs
      * @throws CommandException
      */
-
     @Override
     public void execute(Environment env, PrintStream stdout, InputStream stdin, String[] commandArgs) throws CommandException {{
-        int number = Integer.parseInt(commandArgs[0]);
+        int number;
+        if (commandArgs.length == 0){
+            stdout.println("Введите id");
+            number = Integer.parseInt(scanner.nextLine());
+        }
+        else {
+            number = Integer.parseInt(commandArgs[0]);
+        }
+
         if (env.getTickets().isEmpty()) {
             throw new CommandException("Коллекция пуста! Попробуйте другую команду");
         }
         long min = 100000;
         try{
         for (Ticket element: env.getTickets()){
-            System.out.println(element);
-            System.out.println("1");
             long id = element.getId();
             long x = element.getCoorX();
             long y = element.getCoordinates().getY();

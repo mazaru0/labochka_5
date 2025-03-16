@@ -32,22 +32,22 @@ public class Ticket {
         if (creationDate != null){
             this.creationDate = new java.util.Date();
         } else {
-            throw new IllegalArgumentException("Дата не можеь быть пустой");
+            throw new IllegalArgumentException("Дата не может быть пустой");
         }
         if (price > 0) {
             this.price = price;
         } else {
-            throw new IllegalArgumentException("ID должно быть больше нуля");
+            throw new IllegalArgumentException("Цена должна быть больше нуля");
         }
         if (type != null){
             this.type = type;
         } else {
-            throw new IllegalArgumentException("Координаты не могут быть null");
+            throw new IllegalArgumentException("Тип не могут быть null");
         }
         if (venue != null){
             this.venue = venue;
         } else {
-            throw new IllegalArgumentException("Координаты не могут быть null");
+            throw new IllegalArgumentException("Место не могут быть null");
         }
     }
 
