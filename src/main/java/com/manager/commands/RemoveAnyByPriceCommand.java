@@ -10,10 +10,10 @@ import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.Scanner;
 
-public class RemoveAnyByPrice extends Command {
+public class RemoveAnyByPriceCommand extends Command {
     private final Scanner scanner;
 
-    public RemoveAnyByPrice() {
+    public RemoveAnyByPriceCommand() {
         super("remove_any_by_price");
         this.scanner = new Scanner(System.in);
     }
@@ -39,7 +39,8 @@ public class RemoveAnyByPrice extends Command {
         } catch (NumberFormatException e) {
             System.err.println("Ошибка: Цена должна быть числом.");
         }
-    }
+
+}
 
     @Override
     public String getHelp() {
