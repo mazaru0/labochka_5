@@ -13,10 +13,10 @@ import java.time.Instant;
 import java.util.Date;
 import java.util.Scanner;
 
-public class Add extends Command {
+public class AddCommand extends Command {
     private final Scanner scanner;
 
-    public Add() {
+    public AddCommand() {
         super("add");
         this.scanner = new Scanner(System.in);
     }

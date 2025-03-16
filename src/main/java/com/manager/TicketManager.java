@@ -126,4 +126,74 @@ public class TicketManager {
             System.err.println("Ошибка при загрузке файла: " + e.getMessage());
         }
     }
-}
+public static void main(String[] args) {
+    final List<String> commandHistory = new LinkedList<>();
+
+    String filePath = System.getenv("TICKET_FILE");
+
+    if (filePath == null) {
+        filePath = "tickets.xml";
+    }
+    TicketManager manager = new TicketManager(filePath);
+    Scanner scanner = new Scanner(System.in);
+    System.out.println(manager);
+    HashMap<String, Command> map = new HashMap<>();
+    AddCommand addCommand = new AddCommand();
+    map.put(addCommand.getName(), addCommand);
+    UpdateIdCommand update = new UpdateIdCommand();
+    map.put(update.getName(), update);
+    ClearCommand clearCommand = new ClearCommand();
+    map.put(clearCommand.getName(), clearCommand);
+    InfoCommand infoCommand = new InfoCommand();
+    map.put(infoCommand.getName(), infoCommand);
+    ExitCommand exitCommand = new ExitCommand();
+    map.put(exitCommand.getName(), exitCommand);
+    RemoveAnyByPriceCommand removeAnyByPriceCommand = new RemoveAnyByPriceCommand();
+    map.put(removeAnyByPriceCommand.getName(), removeAnyByPriceCommand);
+    RemoveByIdCommand removeByIdCommand = new RemoveByIdCommand();
+    map.put(removeByIdCommand.getName(), removeByIdCommand);
+    RemoveHeadCommand removeHeadCommand = new RemoveHeadCommand();
+    map.put(removeHeadCommand.getName(), removeHeadCommand);
+    SaveCommand saveCommand = new SaveCommand();
+    map.put(saveCommand.getName(), saveCommand);
+    ShowCommand showCommand = new ShowCommand();
+    map.put(showCommand.getName(), showCommand);
+    HelpCommand helpCommand = new HelpCommand();
+    map.put(helpCommand.getName(), helpCommand);
+    HistoryCommand historyCommand = new HistoryCommand();
+    map.put(historyCommand.getName(), historyCommand);
+    AddIfMinCommand addIfMinCommand = new AddIfMinCommand();
+    map.put(addIfMinCommand.getName(), addIfMinCommand);
+    GroupCountingByCoordinatesCommand groupCountingByCoordinatesCommand = new GroupCountingByCoordinatesCommand();
+    map.put(groupCountingByCoordinatesCommand.getName(),groupCountingByCoordinatesCommand);
+    PrintUniquePriceCommand printUniquePriceCommand = new PrintUniquePriceCommand();
+    map.put(printUniquePriceCommand.getName(),printUniquePriceCommand);
+    ExecuteScriptCommand executeScriptCommand = new ExecuteScriptCommand();
+    map.put(executeScriptCommand.getName(),executeScriptCommand);
+
+
+
+
+    Environment environment = new Environment(map, manager.tickets, manager.filePath, commandHistory);
+
+    while (scanner.hasNextLine()) {
+        String line = scanner.nextLine();
+        String[] s = line.split(" ");
+        String[] commandArgs = new String[s.length - 1];
+        System.arraycopy(s, 1, commandArgs, 0, commandArgs.length);
+        if (map.containsKey(s[0])) {
+            commandHistory.add(s[0]);
+            if (commandHistory.size() > 7) {
+                commandHistory.remove(0);
+            }
+            Command command = map.get(s[0]);
+            try {
+                command.execute(environment, System.out, System.in, commandArgs);
+            } catch (CommandException e) {
+                System.err.println(e.getMessage());
+            }
+        } else {
+            System.err.println("Неизвестная команда, используйте help, чтобы посмотреть список доступных команд.");
+        }
+    }
+}}

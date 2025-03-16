@@ -15,10 +15,10 @@ import java.util.Date;
 import java.util.PriorityQueue;
 import java.util.Scanner;
 
-public class Update extends Command {
+public class UpdateIdCommand extends Command {
     private final Scanner scanner;
 
-    public Update() {
+    public UpdateIdCommand() {
         super("update");
         this.scanner = new Scanner(System.in);
     }
