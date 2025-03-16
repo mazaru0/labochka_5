@@ -17,7 +17,7 @@ public class Add extends Command {
     private final Scanner scanner;
 
     public Add() {
-        super("add ");
+        super("add");
         this.scanner = new Scanner(System.in);
     }
 
@@ -28,28 +28,53 @@ public class Add extends Command {
             System.out.println("Введите данные для нового билета:");
 
             System.out.print("Введите имя билета: ");
-            String name = scanner.nextLine();
-            if (name == null || name.trim().isEmpty()) {
-                throw new IllegalArgumentException("Имя билета не может быть пустым.");
+            String name = null;
+            while (name == null || name.trim().isEmpty()) {
+                try {
+                    name = scanner.nextLine();
+                } catch (IllegalArgumentException e) {
+                    System.err.println("Некорректное имя билета, попробуйте снова");
+                }
             }
 
             System.out.print("Введите цену билета (больше 0): ");
-            long price = Long.parseLong(scanner.nextLine());
-            if (price <= 0) {
-                throw new IllegalArgumentException("Цена должна быть больше 0.");
+            long price = 0;
+            while (price <= 0) {
+                try {
+                    price = Long.parseLong(scanner.nextLine());
+                    if (price <= 0) {
+                        throw new IllegalArgumentException("Цена должна быть больше нуля");
+                    }
+                } catch (IllegalArgumentException e) {
+                    System.err.println("Некорректоная цена билета, попробуйте снова");
+                }
             }
 
             System.out.println("Введите координаты:");
             System.out.print("Введите x (больше -9): ");
-            int x = Integer.parseInt(scanner.nextLine());
-            if (x <= -9) {
-                throw new IllegalArgumentException("Значение x должно быть больше -9.");
+            int x = -10;
+            while (x <= -9) {
+                try {
+                    x = Integer.parseInt(scanner.nextLine());
+                    if (x <= -9) {
+                        throw new IllegalArgumentException("X должнен быть больше -9");
+                    }
+                } catch (IllegalArgumentException e) {
+                    System.err.println("Некорректоный x, попробуйте снова");
+                }
             }
 
             System.out.print("Введите y (больше -133): ");
-            int y = Integer.parseInt(scanner.nextLine());
-            if (y <= -133) {
-                throw new IllegalArgumentException("Значение y должно быть больше -133.");
+            int y = -150;
+            while (y <= -133) {
+                try {
+                    y = Integer.parseInt(scanner.nextLine());
+                    if (y <= -133) {
+                        throw new IllegalArgumentException("Y должнен быть больше -133");
+                    }
+                } catch (IllegalArgumentException e) {
+                    System.err.println("Некорректоный y, попробуйте снова");
+                }
             }
 
             Coordinates coordinates = new Coordinates(x, y);
@@ -68,11 +93,17 @@ public class Add extends Command {
             }
 
             System.out.print("Введите название места: ");
-            String venueName = scanner.nextLine();
-            if (venueName == null || venueName.trim().isEmpty()) {
-                throw new IllegalArgumentException("Название места не может быть пустым.");
+            String venueName = null;
+            while (venueName == null || venueName.trim().isEmpty()) {
+                try {
+                    venueName = scanner.nextLine();
+                    if (venueName == null || venueName.trim().isEmpty()){
+                        throw new IllegalArgumentException("Название места не может быть пустым.");
+                    }
+                } catch (IllegalArgumentException e) {
+                    System.err.println("Некорректное название места. Попробуйте снова.");
+                }
             }
-
             System.out.print("Введите вместимость места (может быть пустым): ");
             String capacityStr = scanner.nextLine();
             Integer capacity = (capacityStr.isEmpty()) ? null : Integer.parseInt(capacityStr);

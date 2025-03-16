@@ -14,8 +14,8 @@ import javax.xml.parsers.*;
 import org.w3c.dom.*;
 
 public class TicketManager {
-    private PriorityQueue<Ticket> tickets;
-    private final String filePath;
+    public PriorityQueue<Ticket> tickets;
+    public final String filePath;
 
     public TicketManager(String filePath) {
         this.filePath = filePath;
@@ -114,7 +114,7 @@ public class TicketManager {
                 String capacityStr = venueElement.getElementsByTagName("capacity").item(0).getTextContent();
                 Integer venueCapacity = null;
                 if (capacityStr != null && !capacityStr.trim().isEmpty() && !capacityStr.equals("null")) {
-                    venueCapacity = Integer.parseInt(capacityStr);
+                    venueCapacity = (Integer) Integer.parseInt(capacityStr);
                 }
 
                 Venue venue = new Venue(venueName, venueCapacity);
@@ -124,70 +124,6 @@ public class TicketManager {
             }
         } catch (Exception e) {
             System.err.println("Ошибка при загрузке файла: " + e.getMessage());
-        }
-    }
-
-
-
-    public static void main(String[] args) {
-        final List<String> commandHistory = new LinkedList<>();
-
-        String filePath = System.getenv("TICKET_FILE");
-        if (filePath == null) {
-            filePath = "tickets.xml";
-        }
-        TicketManager manager = new TicketManager(filePath);
-        Scanner scanner = new Scanner(System.in);
-
-        HashMap<String, Command> map = new HashMap<>();
-        Add add = new Add();
-        map.put(add.getName(), add);
-        Update update = new Update();
-        map.put(update.getName(), update);
-        Clear clear = new Clear();
-        map.put(clear.getName(), clear);
-        Info info = new Info();
-        map.put(info.getName(), info);
-        Exit exit = new Exit();
-        map.put(exit.getName(), exit);
-        RemoveAnyByPrice removeAnyByPrice = new RemoveAnyByPrice();
-        map.put(removeAnyByPrice.getName(), removeAnyByPrice);
-        RemoveById removeById = new RemoveById();
-        map.put(removeById.getName(), removeById);
-        RemoveHead removeHead = new RemoveHead();
-        map.put(removeHead.getName(), removeHead);
-        Save save = new Save();
-        map.put(save.getName(), save);
-        Show show = new Show();
-        map.put(show.getName(), show);
-        Help help = new Help();
-        map.put(help.getName(), help);
-        History history = new History();
-        map.put(history.getName(), history);
-        AddIfMinCommand addIfMinCommand = new AddIfMinCommand();
-        map.put(addIfMinCommand.getName(), addIfMinCommand);
-
-        Environment environment = new Environment(map, manager.tickets, manager.filePath, commandHistory);
-
-        while (scanner.hasNextLine()) {
-            String line = scanner.nextLine();
-            String[] s = line.split(" ");
-            String[] commandArgs = new String[s.length - 1];
-            System.arraycopy(s, 1, commandArgs, 0, commandArgs.length);
-            if (map.containsKey(s[0])) {
-                commandHistory.add(s[0]);
-                if (commandHistory.size() > 7) {
-                    commandHistory.remove(0);
-                }
-                Command command = map.get(s[0]);
-                try {
-                    command.execute(environment, System.out, System.in, commandArgs);
-                } catch (CommandException e) {
-                    System.err.println(e.getMessage());
-                }
-            } else {
-                System.err.println("Неизвестная команда, используйте help, чтобы посмотреть список доступных команд.");
-            }
         }
     }
 }
