@@ -1,7 +1,11 @@
 package com.manager.model;
 
-import java.util.ArrayList;
+import com.manager.commands.exception.CommandException;
+
+import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.Date;
+import java.util.Scanner;
 
 public class Ticket {
     private static long idCounter = 1;
@@ -116,4 +120,10 @@ public class Ticket {
     public void setVenue(Venue venue) {
         this.venue = venue;
     }
-}
+    public long getCoorX(){
+        long x=coordinates.getX();
+        return x;
+
+    }
+
+        }

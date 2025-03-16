@@ -4,7 +4,7 @@
         <name>Обновленный билет</name>
         <price>150</price>
         <coordinates>
-            <x>10</x>
+            <x>-5</x>
             <y>50</y>
         </coordinates>
         <creationDate>Mon Mar 03 04:49:09 MSK 2025</creationDate>
