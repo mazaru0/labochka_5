@@ -71,7 +71,7 @@ public class ExecuteScriptCommand extends Command {
 
         }
         else {
-            System.out.println("Вывод команды: " + element);
+            stdout.println("Вывод команды: " + element);
             stringCommandHashMap.get(element).execute(env,stdout,stdin,commandArgs);
         }
         }}

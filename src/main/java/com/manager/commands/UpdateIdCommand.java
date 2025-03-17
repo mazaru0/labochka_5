@@ -29,19 +29,34 @@ public class UpdateIdCommand extends Command {
         try {
             PriorityQueue<Ticket> updatedQueue = new PriorityQueue<>(Comparator.comparingLong(Ticket::getId));
             boolean found = false;
-            String id = "";
+            int id;
 
-            if (commandArgs.length == 0){
-                stdout.println("Введите id");
-                id = scanner.nextLine();
+            if (commandArgs.length == 0) {
+                while (true) {
+                    stdout.println("Введите id либо введите exit для выхода из команды");
+                    String input = scanner.nextLine().trim(); // Считываем ввод и убираем пробелы
+
+                    if (input.equalsIgnoreCase("exit")) { // Проверяем, не ввёл ли пользователь "exit"
+                        stdout.println("Выход из команды.");
+                        return; // Выход из метода или команды
+                    }
+
+                    try {
+                        // Попытка преобразовать input в число
+                        id = Integer.parseInt(input);
+                        break; // Если успешно, выходим из цикла
+                    } catch (NumberFormatException e) {
+                        System.err.println("Ошибка: ID должен быть числом."); // Выводим ошибку, если ввод не число
+                    }
+                }
             }
             else {
-                id = commandArgs[0];
+                id = Integer.parseInt(commandArgs[0]);
             }
             while (!env.getTickets().isEmpty()) {
                 Ticket ticket = env.getTickets().poll();
 
-                if (ticket.getId() == Integer.parseInt(commandArgs.length == 0 ? id : commandArgs[0])) {
+                if (ticket.getId() == Integer.parseInt(commandArgs.length == 0 ? String.valueOf(id) : commandArgs[0])) {
                     try {
                         System.out.println("Введите данные для этого билета сначала:");
 

@@ -34,12 +34,28 @@ public class AddIfMinCommand extends Command {
      * @throws CommandException
      */
     @Override
-    public void execute(Environment env, PrintStream stdout, InputStream stdin, String[] commandArgs) throws CommandException {{
+    public void execute(Environment env, PrintStream stdout, InputStream stdin, String[] commandArgs) throws CommandException {
+        try{
         int number;
-        if (commandArgs.length == 0){
-            stdout.println("Введите id");
-            number = Integer.parseInt(scanner.nextLine());
+        if (commandArgs.length == 0) {
+            while (true) {
+                stdout.println("Введите число либо введите exit для выхода из команды");
+                String input = scanner.nextLine().trim(); // Считываем ввод и убираем пробелы
+
+                if (input.equalsIgnoreCase("exit")) { // Проверяем, не ввёл ли пользователь "exit"
+                    stdout.println("Выход из команды.");
+                    return; // Выход из метода или команды
+                }
+
+                try {
+                    number = Integer.parseInt(input); // Пытаемся преобразовать ввод в число
+                    break; // Если успешно, выходим из цикла
+                } catch (NumberFormatException e) {
+                    System.err.println("Ошибка: параметр должен быть числом."); // Выводим ошибку, если ввод не число
+                }
+            }
         }
+
         else {
             number = Integer.parseInt(commandArgs[0]);
         }
@@ -70,8 +86,9 @@ public class AddIfMinCommand extends Command {
             stringCommandHashMap.get("add").execute(env,stdout,stdin,commandArgs);
         } else {
             throw new CommandException("Новый билет не может быть создан!");
-        }
         }}
+         catch (NumberFormatException e) {
+            System.err.println("Ошибка: ID должен быть числом.");}}
     /**
      * Справка для команды help
      * @return
