@@ -32,17 +32,41 @@ public class ExecuteScriptCommand extends Command {
     @Override
     public void execute(Environment env, PrintStream stdout, InputStream stdin, String[] commandArgs) throws CommandException {
      String name;
-        if (commandArgs[0].length()==0){
-          stdout.println("Введите имя файла");
-            name = scanner.nextLine();
-      }
+        if (commandArgs.length == 0) {
+            while (true) {
+                System.out.println("Введите id (имя файла) либо введите exit для выхода из команды:");
+                String input = scanner.nextLine().trim(); // Считываем ввод и убираем пробелы
+
+                if (input.equalsIgnoreCase("exit")) { // Проверяем, не ввёл ли пользователь "exit"
+                    System.out.println("Выход из команды.");
+                    return; // Выход из метода или команды
+                }
+
+                // Проверяем, что ввод не пустой
+                if (input.isEmpty()) {
+                    System.err.println("Ошибка: ID не может быть пустым."); // Сообщаем об ошибке
+                    continue; // Пропускаем текущую итерацию и продолжаем цикл
+                }
+
+                // Создаем объект File и проверяем его существование
+                File file = new File(input);
+                if (!file.exists()) {
+                    System.err.println("Ошибка: Файл \"" + input + "\" не существует в директории. ");
+                    continue; // Пропускаем текущую итерацию и продолжаем цикл
+                }
+
+                // Если файл существует, присваиваем значение переменной id
+                name = input;
+                System.out.println("Файл \"" + name + "\" успешно найден.");
+                break; // Если успешно, выходим из цикла
+            }
+        }
         else{
             name = commandArgs[0];
 
         }
        ArrayList<String> itemsList = new ArrayList<>();
         Scanner scanner = new Scanner(stdin);
-        System.out.println(name);
         try (BufferedReader file = new BufferedReader(new FileReader(name))) {
             if (file == null) {
                 throw new CommandException ("Ошибка: Переменная окружения не установлена!");

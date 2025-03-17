@@ -21,21 +21,33 @@ public class RemoveAnyByPriceCommand extends Command {
     @Override
     public void execute(Environment env, PrintStream stdout, InputStream stdin, String[] commandArgs) {
         try {
-            String price = "";
+            int price=0;
+            if (commandArgs.length == 0) {
+                while (true) {
+                    stdout.println("Введите число либо введите exit для выхода из команды");
+                    String input = scanner.nextLine().trim(); // Считываем ввод и убираем пробелы
 
-            if (commandArgs.length == 0){
-                stdout.println("Введите цену");
-                price = scanner.nextLine();
-            }
+                    if (input.equalsIgnoreCase("exit")) { // Проверяем, не ввёл ли пользователь "exit"
+                        stdout.println("Выход из команды.");
+                        return; // Выход из метода или команды
+                    }
+
+                    try {
+                        price = Integer.parseInt(input); // Пытаемся преобразовать ввод в число
+                        break; // Если успешно, выходим из цикла
+                    } catch (NumberFormatException e) {
+                        System.err.println("Ошибка: параметр должен быть числом."); // Выводим ошибку, если ввод не число
+                    }
+                }}
 
             for (Ticket ticket : env.getTickets()) {
-                if (ticket.getPrice() == Integer.parseInt(commandArgs.length == 0 ? price : commandArgs[0])) {
+                if (ticket.getPrice() == Integer.parseInt(commandArgs.length == 0 ? String.valueOf(price) : commandArgs[0])) {
                     env.getTickets().remove(ticket);
-                    stdout.println("Удален билет с ценой: " + Integer.parseInt(commandArgs.length == 0 ? price : commandArgs[0]));
+                    stdout.println("Удален билет с ценой: " + Integer.parseInt(commandArgs.length == 0 ? String.valueOf(price) : commandArgs[0]));
                     return;
                 }
             }
-            stdout.println("Билет с ценой " + Integer.parseInt(commandArgs.length == 0 ? price : commandArgs[0]) + " не найден.");
+            stdout.println("Билет с ценой " + Integer.parseInt(commandArgs.length == 0 ? String.valueOf(price) : commandArgs[0]) + " не найден.");
         } catch (NumberFormatException e) {
             System.err.println("Ошибка: Цена должна быть числом.");
         }

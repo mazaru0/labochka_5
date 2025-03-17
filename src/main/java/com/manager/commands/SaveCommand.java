@@ -8,10 +8,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.Scanner;
 
 public class SaveCommand extends Command {
+    private final Scanner scanner;
     public SaveCommand() {
         super("save");
+        this.scanner=new Scanner(System.in);
     }
 
     /**
@@ -24,17 +27,16 @@ public class SaveCommand extends Command {
 
     @Override
     public void execute(Environment env, PrintStream stdout, InputStream stdin, String[] commandArgs) {
-        try (FileWriter writer = new FileWriter(env.getFilePath())) {
-            writer.write("<Tickets>\n");
-            for (Ticket ticket : env.getTickets()) {
-                writer.write(ticket.toXmlString() + "\n");
-            }
-            writer.write("</Tickets>");
-            stdout.println("Файл успешно сохранён.");
-        } catch (IOException e) {
-            System.err.println("Ошибка записи в файл.");
-        }
-    }
+        try{ 
+            String resultMessage = "";// Создаем XML с введенными данными
+            for (Ticket ticket: env.getTickets()){
+        XmlConverter xmlConverter = new XmlConverter(ticket.getId(), ticket.getName(), ticket.getPrice(), ticket.getCoorX(), ticket.getCoordinates().getY(), ticket.getCreationDate(),
+                ticket.getType(), ticket.getVenue().getId(), ticket.getVenue().getName(), ticket.getVenue().getCapacity());
+            resultMessage = xmlConverter.createXml();} // Сохраняем данные и получаем сообщение
+            System.out.println(resultMessage);
+    } catch (Exception e) {
+        e.printStackTrace();
+    }}
     /**
      * Справка для команды help
      * @return

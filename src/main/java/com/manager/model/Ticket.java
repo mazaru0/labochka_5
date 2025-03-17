@@ -51,6 +51,22 @@ public class Ticket {
         }
     }
 
+    public static long getIdCounter() {
+        return idCounter;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public TicketType getType() {
+        return type;
+    }
+
     public Coordinates getCoordinates() {
         return coordinates;
     }
